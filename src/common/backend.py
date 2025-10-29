@@ -415,7 +415,7 @@ def get_scoreboard(key, sort_by="score", reverse=False):
     rows = []
     for i in range(ds_memory_map[key]["count"]):
         row = ds_read_record(key, i)
-        if row.get("score", 0) > 0:
+        if row is not None and row.get("score", 0) > 0:
             rows.append(row)
 
     # sort the rows by score
@@ -952,6 +952,10 @@ def connect_to_wifi(initialize=False):
     wifi_credentials = ds_read_record("configuration", 0)
     ssid = wifi_credentials["ssid"]
     password = wifi_credentials["password"]
+
+    print("-"*40)
+    print(wifi_credentials)
+    print("-"*40)
 
     if not ssid:
         return False

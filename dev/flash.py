@@ -113,8 +113,8 @@ def apply_local_config_to_pico(pico_port, config_file="dev/config.json"):
         "config = datastore.read_record('configuration')",
     ]
     for key, value in local_config.items():
-        print("*"*40)
-        print(key,value)
+        print("*" * 40)
+        print(key, value)
         config_script_lines.append(f"config['{key}'] = '{value}'")
     config_script_lines.append("datastore.write_record('configuration', config)")
 
@@ -163,9 +163,9 @@ def write_test_data(pico_port, test_data_file="dev/test_data.json"):
         + [f"ScoreTrack.update_individual_score({json.dumps(record)})" for record in test_data["individual"]]
     )
 
-    print('*'*20)
+    print("*" * 20)
     print(test_data_script)
-    print('*'*20)
+    print("*" * 20)
 
     cmd = f"mpremote connect {pico_port} exec '{test_data_script}'"
     for attempt in range(3):
